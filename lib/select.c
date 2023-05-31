@@ -351,8 +351,10 @@ int Curl_poll(struct pollfd ufds[], unsigned int nfds, timediff_t timeout_ms)
         FD_SET(ufds[i].fd, &fds_read);
       if(ufds[i].events & (POLLWRNORM|POLLOUT))
         FD_SET(ufds[i].fd, &fds_write);
+#ifndef __wasi__
       if(ufds[i].events & (POLLRDBAND|POLLPRI))
         FD_SET(ufds[i].fd, &fds_err);
+#endif
     }
   }
 
@@ -387,12 +389,14 @@ int Curl_poll(struct pollfd ufds[], unsigned int nfds, timediff_t timeout_ms)
       if(ufds[i].events & POLLOUT)
         ufds[i].revents |= POLLOUT;
     }
+#ifndef __wasi__
     if(FD_ISSET(ufds[i].fd, &fds_err)) {
       if(ufds[i].events & POLLRDBAND)
         ufds[i].revents |= POLLRDBAND;
       if(ufds[i].events & POLLPRI)
         ufds[i].revents |= POLLPRI;
     }
+#endif
     if(ufds[i].revents)
       r++;
   }
