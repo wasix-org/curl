@@ -22,6 +22,10 @@ document](https://curl.se/docs/faq.html).
 Study [the COPYING file](https://curl.se/docs/copyright.html) for
 distribution terms.
 
+## WASIX
+
+Please see [NOTES-WASIX.md](NOTES-WASIX.md) on how to build CURL on WASIX
+
 ## Contact
 
 If you have problems, questions, ideas or suggestions, please contact us by
