@@ -231,7 +231,6 @@ bool Curl_addr2string(struct sockaddr *sa, curl_socklen_t salen,
       }
       break;
 #endif
-#ifndef __wasix__
 #if (defined(HAVE_SYS_UN_H) || defined(WIN32_SOCKADDR_UN)) && defined(AF_UNIX)
     case AF_UNIX:
       if(salen > (curl_socklen_t)sizeof(CURL_SA_FAMILY_T)) {
@@ -242,7 +241,6 @@ bool Curl_addr2string(struct sockaddr *sa, curl_socklen_t salen,
         addr[0] = 0; /* socket with no name */
       *port = 0;
       return TRUE;
-#endif
 #endif
     default:
       break;
