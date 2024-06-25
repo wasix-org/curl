@@ -897,6 +897,9 @@ int
 Curl_os400_sendto(int sd, char *buffer, int buflen, int flags,
                   const struct sockaddr *dstaddr, int addrlen)
 {
+#ifdef __wasi__
+  flags = 0;
+#endif
   int i;
   struct sockaddr_storage laddr;
 
