@@ -328,6 +328,9 @@ SEND_TYPE_RETV curl_dbg_send(SEND_TYPE_ARG1 sockfd,
                             SEND_TYPE_ARG3 len, SEND_TYPE_ARG4 flags, int line,
                             const char *source)
 {
+#ifdef __wasi__
+  flags = 0;
+#endif
   SEND_TYPE_RETV rc;
   if(countcheck("send", line, source))
     return -1;
