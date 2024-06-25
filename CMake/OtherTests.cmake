@@ -132,4 +132,9 @@ if(NOT CMAKE_CROSSCOMPILING)
           return 0;
     }" HAVE_POLL_FINE)
   endif()
+else()
+  # WASIX has a "fine" poll implementation. No need to check.
+  if(${OS} MATCHES "wasi")
+    set(HAVE_POLL_FINE "yes")
+  endif()
 endif()
